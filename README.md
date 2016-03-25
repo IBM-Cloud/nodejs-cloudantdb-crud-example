@@ -20,6 +20,7 @@ This application uses CloudantNoSQL database service to demonstrate the operatio
 5. On terminal, 'cd' into folder.
 6. Copy "url" from step 4 into app.js of your project present in a local respository.
    Paste url in line 13 of app.js.
+```
 		cloudant_url = "<paste 'url' here>"
    Comment out lines 20-28
 		/*
@@ -36,13 +37,14 @@ This application uses CloudantNoSQL database service to demonstrate the operatio
 				}
 			}
  		*/
-8. cd into the project folder and if required by any modules, run
+ ```
+7. cd into the project folder and if required by any modules, run
 		npm install
-6. Start the application by typing
+8. Start the application by typing
 		node app.js
-7. When the application executes, the first line will say:
+9. When the application executes, the first line will say:
 		http://localhost:<port_number>
-Paste this URL in the browser to open the application.
+10. Paste this URL in the browser to open the application.
 
 ### For more documents on CloudantNoSQLDB
 
