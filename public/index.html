@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html>
+  <head>
+      <title> Cloudant Sample App </title>
+      <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+      <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=0">
+      <link href="stylesheets/bootstrap.min.css" rel="stylesheet">
+      <link href="stylesheets/styles.css" rel="stylesheet">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"> </script>
+      <script src="js/bootstrap.js"> </script>
+      <script src="js/name_actions.js"> </script>
+  </head>
+
+  <body>
+        <div class="navbar navbar-inverse navbar-fixed-top navigation_bar" style="background-color:#152935;">
+          <a class="navbar-brand links" href="https://console.ng.bluemix.net" target="_blank" style="float: left; color: #B3B3B3; font-size: 2.2vw;">IBM Bluemix</a>
+          <a class="navbar-brand links" href="https://hub.jazz.net/git/neerajaganesan/NodeJSCloudantSampleApp" target="_blank" style="float: right; color: #B3B3B3; font-size: 2.2vw;">Source Code</a>
+
+          <div class="content" align="center" style="background-color:#25313D;">
+            <table style="width: 100%;">
+              <tr>
+                <td align="center"><img style="width:40%" class="img-responsive" src="images/cloudant_logo.png" alt="Cloudant logo" /></td>
+                <td align="center"><h3 style="color: #FFFFFA;">Cloudant CRUD Operations</h3></td>
+                <td align="center"><img style="width:40%" class="img-responsive" src="images/bluemix_logo.jpeg" alt="Cloudant logo"/></td>
+              </tr>
+            </table>x
+          </div>
+
+          <button data-target=".navHeaderCollapse" data-toggle="collapse" class="navbar-toggle">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+
+          <div class="container collapse navbar-collapse navHeaderCollapse" style="width: 600px !important">
+            <div class="row">
+              <div class="col-sm-3 operations_options">
+                <button class="btn btn-success crud" type="button" onclick="show_new_name_form()"> Create Name </button>
+              </div>
+              <div class="col-sm-3 operations_options">
+                <form class="form-horizontal" action="/view_names" method="GET" name="outcome" id="outcome">
+                  <fieldset>
+                      <input type="hidden" class="form-control" id="allnames" value="allnames" name="allnames"/>
+                      <button id="view_name" class="btn btn-success crud" type="submit"> Read Names </button>
+                  </fieldset>
+                </form>
+              </div>
+              <div class="col-sm-3 operations_options">
+                <button class="btn btn-success crud" type="button" onclick="show_update_name_form()"> Update Name </button>
+              </div>
+              <div class="col-sm-3 operations_options">
+                <button class="btn btn-success crud" type="button" onclick="show_remove_name_form()"> Delete Name </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      <div class="container form_details">
+          <!-- Creating a new name -->
+          <div id="add_new_name_form" style="display:none">
+            <form class="form-horizontal" action="/add_name" method="GET" name="outcome" id="outcome">
+              <fieldset>
+                <legend class="resizables"> New Record Information </legend>
+                <div class="form-group">
+                    <label for="newname" class="col-lg-2 control-label">Enter name to be added:</label>
+                    <div class="col-lg-10">
+                      <input type="text" autocomplete="off" class="form-control" id="newname" placeholder="Enter Name"/>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                  <div class="col-lg-10 col-lg-offset-2">
+                    <button id="add_name_button" type="submit" class="btn btn-danger">Add Name</button>
+                  </div>
+                </div>
+              </fieldset>
+            </form>
+          </div>
+
+          <div id="added_name" style="display:none">
+            <div class="alert alert-success">
+                Name has been added to the database.
+            </div>
+     	 </div>
+
+     	 <div id="duplicate_name" style="display:none;">
+            <div class="alert alert-danger">
+              Name is already present in the list. Enter a new one.
+            </div>
+     	</div>
+
+     	<div id="db_insert_error" style="display:none">
+            <div class="alert alert-danger">
+     				  Could not insert into database. Please try later.
+            </div>
+     	</div>
+
+     		<div id="db_read_error" style="display:none">
+           	 <div class="alert alert-danger">
+     				  Could not read database to check for name.
+            	</div>
+     		</div>
+
+     		<div id="removed_name" style="display:none">
+            <div class="alert alert-success">
+     				     Removed Name.
+            </div>
+     		</div>
+
+     		<div id="updated_name" style="display:none">
+            <div class="alert alert-success">
+                 Updated Name.
+            </div>
+     		</div>
+
+     		<div id="could_not_update" style="display:none">
+            <div class="alert alert-danger">
+                 Could not update name.
+            </div>
+     		</div>
+
+     		<div id="could_not_remove" style="display:none">
+            <div class="alert alert-danger">
+     				     Could not remove name from list. Please check Database.
+            </div>
+     		</div>
+
+     		<div id="empty_database" style="display:none">
+            <div class="alert alert-warning">
+     				     Database is already empty. It needs to be populated first.
+            </div>
+     		</div>
+
+          <div id="show_all_names" style="display:none">
+          </div>
+
+          <div id="remove_name_form" style="display:none">
+            <div class="alert alert-warning">
+                 Refresh page for updated list of names!
+            </div>
+            <form class="form-horizontal" action="/remove_name" method="GET" name="outcome" id="outcome">
+              <fieldset>
+                <legend class="resizables"> Remove Name Information </legend>
+                  <div class="form-group">
+                      <label for="names_to_be_removed" class="col-lg-2 control-label">Choose name to be removed :</label>
+                      <div class="col-lg-10">
+                        <select class="form-control" name="names_to_be_removed" id="names_to_be_removed">
+
+                        </select>
+                      </div>
+                  </div>
+
+                  <div class="form-group">
+                      <div class="col-lg-10 col-lg-offset-2">
+                        <button id="remove_name_button" type="submit" class="btn btn-danger">Remove Name</button>
+                      </div>
+                  </div>
+              </fieldset>
+            </form>
+          </div>
+
+
+          <div id="update_name_form" style="display:none">
+            <div class="alert alert-warning">
+                 Refresh page for updated list of names!
+            </div>
+            <form class="form-horizontal" action="/update_name" method="GET" name="outcome" id="outcome">
+              <fieldset>
+                <legend class="resizables"> Update Name Information </legend>
+                  <div class="form-group">
+                      <label for="name_list" class="col-lg-2 control-label">Choose name to be updated :</label>
+                      <div class="col-lg-10">
+                        <select class="form-control" name="name_list" id="name_list">
+
+                        </select>
+                      </div>
+                  </div>
+
+                  <div class="form-group">
+                      <label for="updated_new_name" class="col-lg-2 control-label">Enter new name:</label>
+                      <div class="col-lg-10">
+                        <input type="text" autocomplete="off" class="form-control" id="updated_new_name" name="updated_new_name" placeholder="Enter Name"/>
+                      </div>
+                  </div>
+
+                  <div class="form-group">
+                      <div class="col-lg-10 col-lg-offset-2">
+                        <button id="update_name_button" type="submit" class="btn btn-danger">Update Name</button>
+                      </div>
+                  </div>
+              </fieldset>
+            </form>
+          </div>
+        </div>
+
+        <script>
+  			function show_new_name_form()
+  			{
+  				document.getElementById("add_new_name_form").style.display="block";
+  				document.getElementById("remove_name_form").style.display="none";
+  				document.getElementById("update_name_form").style.display="none";
+  				document.getElementById("show_all_names").style.display="none";
+  				document.getElementById("added_name").style.display="none";
+  				document.getElementById("removed_name").style.display="none";
+  				document.getElementById("duplicate_name").style.display="none";
+  				document.getElementById("db_insert_error").style.display="none";
+  				document.getElementById("could_not_remove").style.display="none";
+  				document.getElementById("db_read_error").style.display="none";
+  				document.getElementById("updated_name").style.display="none";
+  				document.getElementById("could_not_update").style.display="none";
+  				document.getElementById("empty_database").style.display="none";
+  			}
+
+  			function show_remove_name_form()
+  			{
+  				document.getElementById("add_new_name_form").style.display="none";
+  				document.getElementById("remove_name_form").style.display="block";
+  				document.getElementById("update_name_form").style.display="none";
+  				document.getElementById("show_all_names").style.display="none";
+  				document.getElementById("added_name").style.display="none";
+  				document.getElementById("removed_name").style.display="none";
+  				document.getElementById("duplicate_name").style.display="none";
+  				document.getElementById("db_insert_error").style.display="none";
+  				document.getElementById("could_not_remove").style.display="none";
+  				document.getElementById("db_read_error").style.display="none";
+  				document.getElementById("updated_name").style.display="none";
+  				document.getElementById("could_not_update").style.display="none";
+  				document.getElementById("empty_database").style.display="none";
+  			}
+
+  			function show_update_name_form()
+  			{
+  				document.getElementById("add_new_name_form").style.display="none";
+  				document.getElementById("remove_name_form").style.display="none";
+  				document.getElementById("update_name_form").style.display="block";
+  				document.getElementById("show_all_names").style.display="none";
+  				document.getElementById("added_name").style.display="none";
+  				document.getElementById("removed_name").style.display="none";
+  				document.getElementById("duplicate_name").style.display="none";
+  				document.getElementById("db_insert_error").style.display="none";
+  				document.getElementById("could_not_remove").style.display="none";
+  				document.getElementById("db_read_error").style.display="none";
+  				document.getElementById("updated_name").style.display="none";
+  				document.getElementById("could_not_update").style.display="none";
+  				document.getElementById("empty_database").style.display="none";
+  			}
+  		</script>
+  </body>
+</html>
