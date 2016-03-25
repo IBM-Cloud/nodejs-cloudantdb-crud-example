@@ -3,7 +3,7 @@
 This application uses CloudantNoSQL database service to demonstrate the operations of Create, Read, Update and Delete (CRUD) using the Node.js runtime.
 
 
-[![Deploy to Bluemix](https://bluemix.net/deploy/button.png)](https://github.com/IBM-Bluemix/nodejs-cloudantdb-crud-example)
+[![Deploy to Bluemix](https://bluemix.net/deploy/button.png)](https://bluemix.net/deploy?repository=https://github.com/IBM-Bluemix/nodejs-cloudantdb-crud-example)
 
 
 ## Application Requirements
