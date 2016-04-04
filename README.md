@@ -22,9 +22,10 @@ This application uses CloudantNoSQL database service to demonstrate the operatio
 ```
     $cf api https://api.ng.bluemix.net
     $cf login
+    $cf create-service cloudantNoSQLDB Shared <service-name>
 ```
 * Bind this service to your app:
-			$cf bs NodeJSCloudantSampleApp <service-name-as-in-step-4>
+			$cf bs NodeJSCloudantSampleApp <service-name-as-in-previous-step>
 * Edit the manifest.yml file and change the <application-host> parameter to something unique.
 ```
     applications:
@@ -35,7 +36,7 @@ This application uses CloudantNoSQL database service to demonstrate the operatio
     memory:256M
     instances: 1
     services:
-    - <service-name-as-in-step-4>
+    - <service-name>
 ```
    The host you use will determinate your application url(e.g. <host>.mybluemix.net). REMOVE the following lines from manifest.yml as you no longer need this cloudant service. The one you created in step 4 will be the one primarily used.
 ```   
@@ -112,7 +113,7 @@ Paste this URL in the browser to open the application.
 
 To troubleshoot your Bluemix app the main useful source of information are the logs, to see them, run:
 
-  ```sh
+  ```
   $ cf logs <application-name> --recent
   ```
 
