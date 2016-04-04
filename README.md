@@ -24,8 +24,10 @@ This application uses CloudantNoSQL database service to demonstrate the operatio
     $cf login
     $cf create-service cloudantNoSQLDB Shared <service-name>
 ```
-* Bind this service to your app:
-			$cf bs NodeJSCloudantSampleApp <service-name-as-in-previous-step>
+* Bind this service to your app
+```
+    $cf bs NodeJSCloudantSampleApp <service-name-as-in-previous-step>
+```
 * Edit the manifest.yml file and change the <application-host> parameter to something unique.
 ```
     applications:
