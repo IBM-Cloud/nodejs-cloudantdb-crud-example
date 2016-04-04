@@ -1,28 +1,73 @@
-# Node.js CloudantDB CRUD Example App
+# NodeJSCloudantSampleApp Overview
 
-This application uses CloudantNoSQL database service to demonstrate the operations of Create, Read, Update and Delete (CRUD) using the Node.js runtime.
+This application uses CloudantNoSQL database service to demonstrate the operations of Creat, Read, Update and Delete into database, using NodeJS runtime. Cloudant node module is used for these operations. They can alternatively be done with API calls which returns a JSON.
 
+### Click on the button below to deploy this Bluemix project to your account
 
-[![Deploy to Bluemix](https://bluemix.net/deploy/button.png)](https://bluemix.net/deploy?repository=https://github.com/IBM-Bluemix/nodejs-cloudantdb-crud-example)
+[![Deploy to Bluemix](https://bluemix.net/deploy/button.png)](https://bluemix.net/deploy?repository=https://hub.jazz.net/git/neerajaganesan/NodeJSCloudantSampleApp)
 
 
 ## Application Requirements
 
-* [Node.js](https://nodejs.org/en/)
-* [CloudantNoSQLDatabase service] (https://cloudant.com/nosql/)
+* NodeJS runtime
+* CloudantNoSQLDatabase service
+
+## Running the app on Bluemix
+
+* [Sign up][sign_up] for Bluemix. 
+* Download and install Cloud Foundry CLI to be used on the terminal.
+* Fork this project into your Bluemix account by clickig on the "Fork Project" button in the top-right hand corner of this page : https://hub.jazz.net/git/neerajaganesan/NodeJSCloudantSampleApp
+* On the Terminal, Connect to Bluemix using the CF CLI and follow the prompts to log in. 
+* Once you're in the same space as the app, create the CloudantNoSQLDB service in Bluemix
+```
+    $cf api https://api.ng.bluemix.net
+    $cf login
+```
+* Bind this service to your app:
+			$cf bs NodeJSCloudantSampleApp <service-name-as-in-step-4>
+* Edit the manifest.yml file and change the <application-host> parameter to something unique.
+```
+    applications:
+    - path: .
+    name: NodeJSCloudantSampleApp
+    host: <change_to_something_unique>
+    framework: node
+    memory:256M
+    instances: 1
+    services:
+    - <service-name-as-in-step-4>
+```
+   The host you use will determinate your application url(e.g. <host>.mybluemix.net). REMOVE the following lines from manifest.yml as you no longer need this cloudant service. The one you created in step 4 will be the one primarily used.
+```   
+	declared-services:
+  	   cloudant-nodejs:
+    	     label: cloudantNoSQLDB
+    	     plan: Shared
+```    	     
+* Start the application by typing
+```
+    $cf start NodeJSCloudantSampleApp
+```    
+
+And voila! Your very own instance of CloudantNoSQLDB with NodeJSCloudantSampleApp is now running on Bluemix.
 
 ## Running the app locally:
 
-1. If you have not already, download Node.js and install it on your local machine.
-2. Clone this repository to your local machine.
-3. Login to Bluemix and create a CloudantNoSQLDB service if it's not alredy present.
-4. Click on the service to open it in a new page. Click on "Service Credentials" in the left pane. Note value of "url".
-5. On terminal, 'cd' into folder.
-6. Copy "url" from step 4 into app.js of your project present in a local respository.
+* If you have not already, download node.js and install it on your local machine.
+* Download the project to your local machine from this link :
+```
+https://hub.jazz.net/git/neerajaganesan/NodeJSCloudantSampleApp
+```
+* On Bluemix Dashboard, create CloudantNoSQLDB service if it's not alredy present.
+* Click on the service to open it in a new page. Click on "Service Credentials" in the left pane. Note value of "url".
+* On terminal, 'cd' into folder.
+* Copy "url" from step 4 into app.js of your project present in a local respository.
    Paste url in line 13 of app.js.
 ```
-		cloudant_url = "<paste 'url' here>"
+	cloudant_url = "<paste 'url' here>"
+```		
    Comment out lines 20-28
+```   
 		/*
 			if(process.env.VCAP_SERVICES)
 			{
@@ -37,14 +82,20 @@ This application uses CloudantNoSQL database service to demonstrate the operatio
 				}
 			}
  		*/
- ```
-7. cd into the project folder and if required by any modules, run
+``` 		
+* cd into the project folder and if required by any modules, run
+```
 		npm install
-8. Start the application by typing
+```		
+* Start the application by typing
+```
 		node app.js
-9. When the application executes, the first line will say:
+```		
+* When the application executes, the first line will say:
+```
 		http://localhost:<port_number>
-10. Paste this URL in the browser to open the application.
+```		
+Paste this URL in the browser to open the application.
 
 ### For more documents on CloudantNoSQLDB
 
