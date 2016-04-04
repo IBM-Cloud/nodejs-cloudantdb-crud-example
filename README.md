@@ -1,6 +1,6 @@
 # NodeJSCloudantSampleApp Overview
 
-This application uses CloudantNoSQL database service to demonstrate the operations of Creat, Read, Update and Delete into database, using NodeJS runtime. Cloudant node module is used for these operations. They can alternatively be done with API calls which returns a JSON.
+This application uses the [Cloudant NoSQL Database service](https://console.ng.bluemix.net/catalog/services/cloudant-nosql-db) to demonstrate the operations of Create, Read, Update and Delete into database using the Node.js runtime. Cloudant node module is used for these operations. They can alternatively be done with API calls which returns a JSON.
 
 ### Click on the button below to deploy this Bluemix project to your account
 
@@ -9,16 +9,16 @@ This application uses CloudantNoSQL database service to demonstrate the operatio
 
 ## Application Requirements
 
-* NodeJS runtime
-* CloudantNoSQLDatabase service
+* Node.js runtime
+* Cloudant NoSQL Database service
 
 ## Running the app on Bluemix
 
 * [Sign up][sign_up] for Bluemix. 
 * Download and install Cloud Foundry CLI to be used on the terminal.
-* Fork this project into your Bluemix account by clickig on the "Fork Project" button in the top-right hand corner of this page : https://hub.jazz.net/git/neerajaganesan/NodeJSCloudantSampleApp
+* Fork this project into your Bluemix account by clickig on the "Fork Project" button in the top-right hand corner of this page : https://github.com/IBM-Bluemix/nodejs-cloudantdb-crud-example
 * On the Terminal, Connect to Bluemix using the CF CLI and follow the prompts to log in. 
-* Once you're in the same space as the app, create the CloudantNoSQLDB service in Bluemix
+* Once you're in the same space as the app, create the Cloudant NoSQL DB service in Bluemix
 ```
     $cf api https://api.ng.bluemix.net
     $cf login
@@ -49,16 +49,16 @@ This application uses CloudantNoSQL database service to demonstrate the operatio
     $cf start NodeJSCloudantSampleApp
 ```    
 
-And voila! Your very own instance of CloudantNoSQLDB with NodeJSCloudantSampleApp is now running on Bluemix.
+And voila! Your very own instance of Cloudant NoSQL DB with NodeJSCloudantSampleApp is now running on Bluemix.
 
 ## Running the app locally:
 
 * If you have not already, download node.js and install it on your local machine.
 * Download the project to your local machine from this link :
 ```
-https://hub.jazz.net/git/neerajaganesan/NodeJSCloudantSampleApp
+https://github.com/IBM-Bluemix/nodejs-cloudantdb-crud-example
 ```
-* On Bluemix Dashboard, create CloudantNoSQLDB service if it's not alredy present.
+* On Bluemix Dashboard, create Cloudant No SQLDB service if it's not alredy present.
 * Click on the service to open it in a new page. Click on "Service Credentials" in the left pane. Note value of "url".
 * On terminal, 'cd' into folder.
 * Copy "url" from step 4 into app.js of your project present in a local respository.
@@ -97,7 +97,7 @@ https://hub.jazz.net/git/neerajaganesan/NodeJSCloudantSampleApp
 ```		
 Paste this URL in the browser to open the application.
 
-### For more documents on CloudantNoSQLDB
+### For more documents on Cloudant NoSQL DB
 
 * https://cloudant.com
 
