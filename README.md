@@ -16,7 +16,7 @@ This application uses the [Cloudant NoSQL Database service](https://console.ng.b
 
 * [Sign up][sign_up] for Bluemix. 
 * Download and install Cloud Foundry CLI to be used on the terminal.
-* Fork this project into your Bluemix account by clickig on the "Fork Project" button in the top-right hand corner of this page : https://github.com/IBM-Bluemix/nodejs-cloudantdb-crud-example
+* Fork this project into your Gitub account by clickig on the "Fork Project" button in the top-right hand corner of this page : https://github.com/IBM-Bluemix/nodejs-cloudantdb-crud-example
 * On the Terminal, Connect to Bluemix using the CF CLI and follow the prompts to log in. 
 * Once you're in the same space as the app, create the Cloudant NoSQL DB service in Bluemix
 ```
