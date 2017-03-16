@@ -11,4 +11,4 @@ applications:
   host: NodeJSCloudantSampleApp
   disk_quota: 1024M
   services:
-  - cloudant-nodejs
+  - TEST_DB
