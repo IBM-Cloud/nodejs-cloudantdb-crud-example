@@ -4,7 +4,7 @@ This application uses the [Cloudant NoSQL Database service](https://console.ng.b
 
 ### Click on the button below to deploy this Bluemix project to your account
 
-[![Deploy to Bluemix](https://bluemix.net/deploy/button.png)](https://hub.jazz.net/deploy/index.html?repository=https://github.com/IBM-Bluemix/nodejs-cloudantdb-crud-example)
+[![Deploy to Bluemix](https://bluemix.net/deploy/button.png)](https://bluemix.net/deploy?repository=https://github.com/IBM-Bluemix/nodejs-cloudantdb-crud-example)
 
 
 ## Application Requirements
